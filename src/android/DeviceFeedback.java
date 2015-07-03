@@ -26,6 +26,7 @@ public class DeviceFeedback extends CordovaPlugin {
 	
 	// input values
 	final static int VIBRATE_TYPE_INDEX = 0;
+	final static int SOUND_FALLBACK_INDEX = 1;
 	
 	@Override
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -68,6 +69,12 @@ public class DeviceFeedback extends CordovaPlugin {
 			view.performHapticFeedback(args.getInt(VIBRATE_TYPE_INDEX));
 		} catch (JSONException e) {
 			e.printStackTrace();
+			try {
+				view.performHapticFeedback(1);
+			} catch (JSONException e) {
+				e.printStackTrace();
+				if(args.getInt(SOUND_FALLBACK_INDEX)) Sound();
+			}
 		}
 	}
 	
