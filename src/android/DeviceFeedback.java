@@ -73,7 +73,7 @@ public class DeviceFeedback extends CordovaPlugin {
 				view.performHapticFeedback(1);
 			} catch (JSONException e) {
 				e.printStackTrace();
-				if(args.getInt(SOUND_FALLBACK_INDEX)) Sound();
+				if(args.getInt(SOUND_FALLBACK_INDEX)==1) Sound();
 			}
 		}
 	}
