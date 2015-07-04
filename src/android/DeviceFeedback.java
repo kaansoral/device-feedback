@@ -66,14 +66,14 @@ public class DeviceFeedback extends CordovaPlugin {
 	
 	void Vibrate(JSONArray args) {
 		try {
-			view.performHapticFeedback(args.getInt(VIBRATE_TYPE_INDEX));
+			if(!view.performHapticFeedback(args.getInt(VIBRATE_TYPE_INDEX))) args.getInt(999);
 		} catch (JSONException e) {
-			e.printStackTrace();
 			try {
-				view.performHapticFeedback(1);
+				if(!view.performHapticFeedback(1)) args.getInt(999);
 			} catch (JSONException f) {
-				f.printStackTrace();
-				if(args.getInt(SOUND_FALLBACK_INDEX)==1) Sound();
+				try {
+					if(args.getInt(SOUND_FALLBACK_INDEX)==1) Sound();
+				} catch (JSONException g) {}
 			}
 		}
 	}
